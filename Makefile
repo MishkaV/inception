@@ -6,7 +6,7 @@
 #    By: 19801843 <19801843@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/02 14:41:29 by 19801843          #+#    #+#              #
-#    Updated: 2022/01/05 23:52:26 by 19801843         ###   ########.fr        #
+#    Updated: 2022/01/05 23:57:38 by 19801843         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ init:
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 clean:
 	@echo "\n${YELLOW} ${WORD_CLEANING}${NORMAL}"
-	docker-compose -f ./srcs/docker-compose.yml down
+	@docker-compose -f ./srcs/docker-compose.yml down
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 fclean:
 	@echo "\n${YELLOW} ${WORD_FCLEANING}${NORMAL}"

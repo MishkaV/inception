@@ -5,11 +5,7 @@ services:
         build: ./requirements/mariadb
         volumes:
             - ./requirements/mariadb:/var/lib/mysql
-        environment:
-            MYSQL_ROOT_PASSWORD: mysql_root_pass
-            MYSQL_DATABASE: db_name
-            MYSQL_USER: user_name
-            MYSQL_PASSWORD: user_pass
+        env_file: .env
         restart: always
     wordpress:
         image: wordpress
@@ -18,21 +14,17 @@ services:
             - ./requirements/wordpress:/var/www/html
         depends_on:
             - mariadb
-        environment:
-            MYSQL_ROOT_PASSWORD: mysql_root_pass
-            WORDPRESS_DB_NAME: db_name
-            WORDPRESS_DB_USER: user_name
-            WORDPRESS_DB_PASSWORD: user_pass
-            WORDPRESS_DB_HOST: mysql
-            WORDPRESS_TABLE_PREFIX: wp_
+        env_file: .env
         restart: always
     nginx:
-        image: nginx:alpine
+        image: nginx
         build: ./requirements/nginx
         volumes:
             - ./requirements/nginx:/etc/nginx/conf.d
             - ./requirements/wordpress:/var/www/html
         ports:
             - "443:443"
-        links:
+        depends_on:
             - wordpress
+        env_file: .env
+        restart: always
