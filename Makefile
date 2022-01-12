@@ -6,7 +6,7 @@
 #    By: jbenjy <jbenjy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/02 14:41:29 by 19801843          #+#    #+#              #
-#    Updated: 2022/01/12 20:06:18 by jbenjy           ###   ########.fr        #
+#    Updated: 2022/01/12 21:38:18 by jbenjy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ all: init
 init:
 	@echo "\n${MAGENTA} ${WORD_INCEPTION}${NORMAL}"
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
-	cd ./srcs && docker-compose up --build -d
+	@cd ./srcs && docker-compose up --build -d
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
 docker_init:
@@ -86,8 +86,7 @@ clean:
 
 fclean:
 	@echo "\n${YELLOW} ${WORD_FCLEANING}${NORMAL}"
-	docker-compose -f ./srcs/docker-compose.yml down
-
+	@docker-compose -f ./srcs/docker-compose.yml down
 
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 	

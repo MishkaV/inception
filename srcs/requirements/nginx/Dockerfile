@@ -12,3 +12,5 @@ RUN openssl req -x509 -nodes -days 365 \
      -keyout /etc/ssl/jbenjy.key \
      -out /etc/ssl/jbenjy.crt \
      -subj "/c=RU/ST=Russia/L=Moscow/O=school21/OU=21Moscow/CN=jbenjy" ;
+
+CMD [ "nginx", "-g", "daemon off;"]
