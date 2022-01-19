@@ -98,12 +98,12 @@ env:
 
 clean:
 	@echo "\n${YELLOW} ${WORD_CLEANING}${NORMAL}"
-	@docker-compose -f ./srcs/docker-compose.yml down
+	@sudo docker-compose -f ./srcs/docker-compose.yml down
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
 fclean:
 	@echo "\n${YELLOW} ${WORD_FCLEANING}${NORMAL}"
-	@docker-compose -f ./srcs/docker-compose.yml down
+	@sudo docker-compose -f ./srcs/docker-compose.yml down
 
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
