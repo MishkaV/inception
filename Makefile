@@ -57,27 +57,54 @@ WORD_INCEPTION	=	░█████╗░░█████╗░░████
 					╚█████╔╝╚█████╔╝╚█████╔╝███████╗  ██║██║░╚███║╚█████╔╝███████╗██║░░░░░░░░██║░░░██║╚█████╔╝██║░╚███║\n\
 					░╚════╝░░╚════╝░░╚════╝░╚══════╝  ╚═╝╚═╝░░╚══╝░╚════╝░╚══════╝╚═╝░░░░░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝\n
 
+WORD_BASIC			=	██████╗░░█████╗░░██████╗██╗░█████╗░  ░██████╗████████╗░█████╗░███████╗███████╗░░░░░░░░░\n\
+					██╔══██╗██╔══██╗██╔════╝██║██╔══██╗  ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██╔════╝░░░░░░░░░\n\
+					██████╦╝███████║╚█████╗░██║██║░░╚═╝  ╚█████╗░░░░██║░░░███████║█████╗░░█████╗░░░░░░░░░░░\n\
+					██╔══██╗██╔══██║░╚═══██╗██║██║░░██╗  ░╚═══██╗░░░██║░░░██╔══██║██╔══╝░░██╔══╝░░░░░░░░░░░\n\
+					██████╦╝██║░░██║██████╔╝██║╚█████╔╝  ██████╔╝░░░██║░░░██║░░██║██║░░░░░██║░░░░░██╗██╗██╗\n\
+					╚═════╝░╚═╝░░╚═╝╚═════╝░╚═╝░╚════╝░  ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝░░░░░╚═╝╚═╝╚═╝\n
+
+
 all: init
- 
+
 init:
 	@echo "\n${MAGENTA} ${WORD_INCEPTION}${NORMAL}"
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
 	@cd ./srcs && docker-compose up --build -d
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
-docker_init:
-	@echo "\n${MAGENTA} ${WORD_DOCKER}${NORMAL}"
+env:
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
+	#Basic staff
+	@echo "\n${MAGENTA} ${WORD_BASIC}${NORMAL}"
 	sudo apt-get update -y
 	sudo apt-get upgrade -y
 	sudo apt-get install -y ca-certificates curl gnupg lsb-release apt-transport-https software-properties-common
-	
-	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -		
+
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	#Add key for working with docker services
+	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 	sudo apt-get update
-	apt-cache policy
-	sudo apt-get install -y docker-ce-cli:amd64 pip
-	sudo pip install docker-compose
-	
+
+	#Install docker
+	@echo "\n${MAGENTA} ${WORD_DOCKER}${NORMAL}"
+	apt-cache policy docker-cesudo
+	#sudo apt install docker-ce -y
+	#apt-cache policy docker-ce
+	sudo apt install docker-ce
+
+	#Give permission
+	sudo usermod -aG docker $$(whoami)
+
+	#Init docker demon
+	systemctl restart docker
+	#sudo systemctl start docker
+	#sudo systemctl enable docker
+
+	#apt-cache policy
+	#sudo apt-get install -y docker-ce-cli:amd64 pip
+	#sudo pip install docker-compose
+
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 clean:
 	@echo "\n${YELLOW} ${WORD_CLEANING}${NORMAL}"
@@ -89,7 +116,6 @@ fclean:
 	@docker-compose -f ./srcs/docker-compose.yml down
 
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
-	
+
 
 re: fclean all
-	
