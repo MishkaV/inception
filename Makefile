@@ -77,35 +77,25 @@ env:
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
 	#Basic staff
 	@echo "\n${MAGENTA} ${WORD_BASIC}${NORMAL}"
-	sudo apt-get update -y
-	sudo apt-get upgrade -y
-	sudo apt-get install -y ca-certificates curl gnupg lsb-release apt-transport-https software-properties-common
+	sudo apt update
+	sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 
-	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-	#Add key for working with docker services
-	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-	sudo apt-get update
-
-	#Install docker
+	#Init docker
 	@echo "\n${MAGENTA} ${WORD_DOCKER}${NORMAL}"
-	apt-cache policy docker-cesudo
-	#sudo apt install docker-ce -y
-	#apt-cache policy docker-ce
-	sudo apt install docker-ce
+	curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+	printf "%s\n" "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable" |\
+	sudo tee /etc/apt/sources.list.d/docker.list
 
-	#Give permission
+	sudo apt update
+	sudo apt-cache policy docker-ce
+	sudo apt install docker-ce
+	sudo systemctl restart docker
 	sudo usermod -aG docker $$(whoami)
 
-	#Init docker demon
-	systemctl restart docker
-	#sudo systemctl start docker
-	#sudo systemctl enable docker
+	#Init docker compose
+	sudo curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+	sudo chmod +x /usr/local/bin/docker-compose
 
-	#apt-cache policy
-	#sudo apt-get install -y docker-ce-cli:amd64 pip
-	#sudo pip install docker-compose
-
-	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 clean:
 	@echo "\n${YELLOW} ${WORD_CLEANING}${NORMAL}"
 	@docker-compose -f ./srcs/docker-compose.yml down
