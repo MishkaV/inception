@@ -70,7 +70,7 @@ all: init
 init:
 	@echo "\n${MAGENTA} ${WORD_INCEPTION}${NORMAL}"
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
-	@cd ./srcs && docker-compose up --build -d
+	@cd ./srcs && sudo docker-compose up --build -d
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
 env:
