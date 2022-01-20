@@ -70,7 +70,7 @@ all: init
 init:
 	@echo "\n${MAGENTA} ${WORD_INCEPTION}${NORMAL}"
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
-	@cd ./srcs && sudo docker-compose up --build -d
+	@cd ./srcs &&  docker-compose up --build -d
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
 env:
@@ -89,21 +89,24 @@ env:
 	sudo apt update
 	sudo apt-cache policy docker-ce
 	sudo apt install docker-ce
-	sudo systemctl restart docker
-	sudo usermod -aG docker $$(whoami)
+	sudo usermod -aG docker $(USER)
 
 	#Init docker compose
 	sudo curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 	sudo chmod +x /usr/local/bin/docker-compose
 
+	#Restart and login in user to setup docker
+	sudo service docker restart
+	su $(USER)
+
 clean:
 	@echo "\n${YELLOW} ${WORD_CLEANING}${NORMAL}"
-	@sudo docker-compose -f ./srcs/docker-compose.yml down
+	@docker-compose -f ./srcs/docker-compose.yml down
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
 fclean:
 	@echo "\n${YELLOW} ${WORD_FCLEANING}${NORMAL}"
-	@sudo docker-compose -f ./srcs/docker-compose.yml down
+	@docker-compose -f ./srcs/docker-compose.yml down
 
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
