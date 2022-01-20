@@ -4,7 +4,7 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 
 RUN apt-get install -y nginx
-COPY ./conf/nginx.conf /etc/nginx/sites-enabled/nginx.conf 
+COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
 
 RUN apt-get install -y openssl
 RUN openssl req -x509 -nodes -days 365 \
