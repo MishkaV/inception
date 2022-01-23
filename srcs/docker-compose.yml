@@ -41,3 +41,16 @@ networks:
     inc_network:
         name: inc_network
         driver: bridge
+volumes:
+    mariadb:
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/jbenjy/data/mariadb
+    wordpress:
+        driver: local
+        driver_opts:
+            o: bind
+            type: none
+            device: /home/jbenjy/data/wordpress
