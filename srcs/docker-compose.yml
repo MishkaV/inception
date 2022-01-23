@@ -4,7 +4,7 @@ services:
         image: mariadb
         build: requirements/mariadb/
         volumes:
-            - mariadb:/var/lib/mysql
+            - ./mariadb:/var/lib/mysql
         env_file: .env
         networks:
             - inc_network
@@ -14,7 +14,7 @@ services:
         image: wordpress
         build: requirements/wordpress/
         volumes:
-            - wordpress:/var/www/html
+            - ./wordpress:/var/www/html
         depends_on:
             - mariadb
         env_file: .env
@@ -26,7 +26,7 @@ services:
         image: nginx:latest
         build: requirements/nginx/
         volumes:
-            - wordpress:/var/www/html
+            - ./wordpress:/var/www/html
         ports:
             - "443:443"
         depends_on:
