@@ -99,6 +99,9 @@ env:
 	sudo service docker restart
 	su $(USER)
 
+status:
+	@cd ./srcs && docker-compose ps
+
 clean:
 	@echo "\n${YELLOW} ${WORD_CLEANING}${NORMAL}"
 	@docker-compose -f ./srcs/docker-compose.yml down

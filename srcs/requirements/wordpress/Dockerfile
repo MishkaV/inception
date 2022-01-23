@@ -12,3 +12,5 @@ RUN wget https://wordpress.org/latest.tar.gz
 RUN tar -xvzf latest.tar.gz && rm -rf latest.tar.gz
 WORKDIR /
 COPY ./conf/wp-config.php /var/www/wordpress
+
+CMD [ "/usr/sbin/php-fpm7.3", "--nodaemonize" ]
