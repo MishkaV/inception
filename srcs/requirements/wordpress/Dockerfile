@@ -13,4 +13,8 @@ RUN tar -xvzf latest.tar.gz && rm -rf latest.tar.gz
 WORKDIR /
 COPY ./conf/wp-config.php /var/www/wordpress
 
-CMD [ "/usr/sbin/php-fpm7.3", "--nodaemonize" ]
+RUN mkdir /run/php/
+COPY ./conf/init_wp.sh /
+RUN chmod 775 /init_wp.sh
+
+ENTRYPOINT [ "/bin/bash", "init_wp.sh" ]
