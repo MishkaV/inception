@@ -70,6 +70,8 @@ all: init
 init:
 	@echo "\n${MAGENTA} ${WORD_INCEPTION}${NORMAL}"
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
+	sudo mkdir -p /home/jbenjy/data/wordpress
+	sudo mkdir -p /home/jbenjy/data/mariadb
 	@cd ./srcs &&  docker-compose up --build -d
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
