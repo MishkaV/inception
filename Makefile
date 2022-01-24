@@ -6,7 +6,7 @@
 #    By: jbenjy <jbenjy@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/02 14:41:29 by 19801843          #+#    #+#              #
-#    Updated: 2022/01/12 21:38:18 by jbenjy           ###   ########.fr        #
+#    Updated: 2022/01/24 16:12:59 by jbenjy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,8 +70,8 @@ all: init
 init:
 	@echo "\n${MAGENTA} ${WORD_INCEPTION}${NORMAL}"
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
-	sudo mkdir -p /home/jbenjy/data/wordpress
-	sudo mkdir -p /home/jbenjy/data/mariadb
+	# sudo mkdir -p /home/jbenjy/data/wordpress
+	# sudo mkdir -p /home/jbenjy/data/mariadb
 	@cd ./srcs &&  docker-compose up --build -d
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 

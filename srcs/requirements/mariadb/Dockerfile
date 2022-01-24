@@ -8,4 +8,4 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 RUN service mysql start && mysql < init_db.sql
 
 
-CMD ["mysqld"]
+CMD ["mysqld_safe"]
