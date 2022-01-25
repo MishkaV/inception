@@ -13,4 +13,5 @@ RUN openssl req -x509 -nodes -days 365 \
      -out /etc/ssl/jbenjy.crt \
      -subj "/C=RU/ST=Russia/L=Moscow/O=school21/OU=21Moscow/CN=jbenjy" ;
 
+EXPOSE 443
 CMD [ "nginx", "-g", "daemon off;"]
