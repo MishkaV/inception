@@ -8,5 +8,5 @@ COPY ./conf/init_db.sh /var/www/
 RUN chmod +x /var/www/init_db.sh
 
 ENTRYPOINT [ "/var/www/init_db.sh" ]
-EXPOSE 3307
+EXPOSE 3306
 CMD ["mysqld"]
