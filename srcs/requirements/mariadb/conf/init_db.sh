@@ -11,10 +11,23 @@ if [ ! -d var/lib/mysql/main_database ]; then
   mysqladmin -u root password $MYSQL_ROOT_PASSWORD
   service mysql stop
 else
-  mkdir /var/run/mysqld
+  mkdir /var/run/mysqld/
   touch /var/run/mysqld/mysqld.pid
   mkfifo /var/run/mysqld/mysqld.sock
 fi
 chmod +x /var/run/mysqld
 chown -R mysql /var/run/mysqld
+
+#sudo mysql -u root
+
+#touch /var/run/mysqld/mysqld.sock
+#sudo chmod 755 /var/run/mysqld/mysqld.sock
+
+#sudo service mysql restart
+
+#sudo rm -rf /var/run/mysqld
+#sudo mkdir /var/run/mysqld/
+#sudo mkfifo /var/run/mysqld/mysqld.sock
+#sudo chown -R mysql /var/run/mysqld
+
 exec "$@"
