@@ -70,8 +70,8 @@ all: init
 init:
 	@echo "\n${MAGENTA} ${WORD_INCEPTION}${NORMAL}"
 	@echo "\n${YELLOW} ${WORD_BUILDING}${NORMAL}"
-	#sudo mkdir -p /home/jbenjy/data/wordpress
-	#sudo mkdir -p /home/jbenjy/data/mariadb
+	sudo mkdir -p /home/jbenjy/data/wordpress
+	sudo mkdir -p /home/jbenjy/data/mariadb
 	@cd ./srcs &&  docker-compose up --build -d
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
@@ -117,8 +117,6 @@ fclean:
 	@docker-compose -f ./srcs/docker-compose.yml down
 	@sudo rm -rf ./home/jbenjy/data/wordpress
 	@sudo rm -rf ./home/jbenjy/data/mariadb
-	@sudo rm -rf ./srcs/mariadb
-	@sudo rm -rf ./srcs/wordpress
 
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 

@@ -14,7 +14,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp core download --allow-root
     cp /var/www/wp-config.php /var/www/html/
     wp core install --allow-root \
-        --url=localhost \
+        --url=jbenjy.42.fr \
         --title=inception \
         --admin_user=jbenjy \
         --admin_password=password \

@@ -3,7 +3,7 @@ services:
     mariadb:
         build: requirements/mariadb/
         volumes:
-            - ./mariadb:/var/lib/mysql
+            - mariadb:/var/lib/mysql
         env_file: .env
         networks:
             - inc_network
@@ -12,7 +12,7 @@ services:
     wordpress:
         build: requirements/wordpress/
         volumes:
-            - ./wordpress:/var/www/html
+            - wordpress:/var/www/html
         depends_on:
             - mariadb
         env_file: .env
@@ -23,7 +23,7 @@ services:
     nginx:
         build: requirements/nginx/
         volumes:
-            - ./wordpress:/var/www/html
+            - wordpress:/var/www/html
         ports:
             - "443:443"
         depends_on:
@@ -41,12 +41,14 @@ networks:
 volumes:
     mariadb:
         driver: local
+        name: mariadb
         driver_opts:
             o: bind
             type: none
             device: /home/jbenjy/data/mariadb
     wordpress:
         driver: local
+        name: wordpress
         driver_opts:
             o: bind
             type: none
