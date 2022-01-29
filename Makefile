@@ -114,11 +114,15 @@ clean:
 
 fclean:
 	@echo "\n${YELLOW} ${WORD_FCLEANING}${NORMAL}"
-	@docker-compose -f ./srcs/docker-compose.yml down
-	@sudo rm -rf ./home/jbenjy/data/wordpress
-	@sudo rm -rf ./home/jbenjy/data/mariadb
+	@sudo rm -rf /home/jbenjy/data/wordpress
+	@sudo rm -rf /home/jbenjy/data/mariadb
+	@docker stop $$(docker ps -qa)
+	@docker rm $$(docker ps -qa)
+	@docker rmi -f $$(docker images -qa)
+	@docker volume rm $$(docker volume ls -q)
+	@docker network rm $$(docker network ls -q)
 
 	@echo "\n${GREEN} ${WORD_SUCCESS}${NORMAL}"
 
 
-re: fclean all
+re: clean all

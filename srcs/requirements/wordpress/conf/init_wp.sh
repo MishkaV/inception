@@ -19,7 +19,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --admin_user=jbenjy \
         --admin_password=password \
         --admin_email=jbenjy@gmail.com
-    wp user create --allow-root jbenjy jbenjy@42.fr --user_pass=1234
+    wp user create jbenjy2 jbenjy2@42.fr \
+        --user_pass=1234 \
+        --allow-root
     mv /var/www/object-cache.php /var/www/html/wp-content/
 fi
 service redis-server start
