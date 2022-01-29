@@ -33,6 +33,15 @@ services:
         networks:
             - inc_network
         restart: always
+    webfront:
+        build: requirements/bonus/webfront
+        image: webfront
+        container_name: webfront
+        ports:
+            - "10000:10000"
+        networks:
+            - inc_network
+        restart: always
 
 networks:
     inc_network:
