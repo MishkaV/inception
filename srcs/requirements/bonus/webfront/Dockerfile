@@ -9,6 +9,8 @@ COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 RUN mkdir -p /var/www/webfront/
 COPY ./conf/index.html /var/www/webfront/
+COPY ./conf/styles.css /var/www/webfront/
+COPY ./conf/ava.png /var/www/webfront/
 RUN chmod 777 /var/www/webfront/*
 
 RUN apt-get install -y openssl
