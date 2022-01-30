@@ -63,6 +63,18 @@ services:
             - inc_network
         env_file: .env
         restart: always
+    redis:
+        build: requirements/bonus/redis/
+        container_name: redis
+        ports:
+            - 6379:6379
+        depends_on:
+            - nginx
+        networks:
+            - inc_network
+        restart: always
+        env_file:
+        - .env
 
 networks:
     inc_network:
