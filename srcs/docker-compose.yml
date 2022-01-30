@@ -35,7 +35,6 @@ services:
         restart: always
     webfront:
         build: requirements/bonus/webfront
-        image: webfront
         container_name: webfront
         ports:
             - "10000:10000"
@@ -44,7 +43,6 @@ services:
         restart: always
     admin:
         build: requirements/bonus/admin
-        image: admin
         container_name: admin
         ports:
             - "11000:11000"
@@ -52,6 +50,18 @@ services:
             - nginx
         networks:
             - inc_network
+        restart: always
+    ftp:
+        build: requirements/bonus/ftp
+        container_name: ftp
+        volumes:
+            - wordpress:/var/www/html
+        ports:
+            - "21:21"
+            - "21000:21000"
+        networks:
+            - inc_network
+        env_file: .env
         restart: always
 
 networks:
