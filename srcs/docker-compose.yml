@@ -57,7 +57,6 @@ services:
         volumes:
             - wordpress:/var/www/html
         ports:
-            - "21:21"
             - "21000:21000"
         networks:
             - inc_network
@@ -70,6 +69,16 @@ services:
             - 6379:6379
         depends_on:
             - nginx
+        networks:
+            - inc_network
+        restart: always
+        env_file:
+        - .env
+    flask:
+        build: requirements/bonus/flask/
+        container_name: flask
+        ports:
+            - 15000:15000
         networks:
             - inc_network
         restart: always
